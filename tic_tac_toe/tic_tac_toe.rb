@@ -16,9 +16,9 @@ block_conditions = [[0,0,0,1,0,0,1,0,0],[0,1,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,1],
 #Method that multiplies individual array elements 
 def multiply_array_elements(array1,array2)
   result_array = []
-  for i in 0..8
+  for index in 0..8
     begin
-    result_array[i] = array1[i]*array2[i]
+    result_array[index] = array1[index]*array2[index]
     rescue 
     #puts 'FAIL!'
     end
@@ -57,7 +57,8 @@ begin
     loop do
       puts "\nChoose an open position to place an x piece:"
       user_input = gets.chomp
-      if (user_input == "1"||user_input == "2"||user_input == "3"||user_input == "4"||user_input == "5"||user_input == "6"||user_input == "7"||user_input == "8"||user_input =="9") 
+      if (user_input == "1"||user_input == "2"||user_input == "3"||user_input == "4"||
+          user_input == "5"||user_input == "6"||user_input == "7"||user_input == "8"||user_input =="9") 
         if (game_board_array[user_input.to_i-1] != "x") && (game_board_array[user_input.to_i-1] != "o")
           break
         end 
@@ -84,18 +85,18 @@ begin
   puts game_board
 
   #Convert x's in array to 1's 
-  x_array = game_board_array.map do |i|
-    if i == "x"
-      i = 1
+  x_array = game_board_array.map do |index|
+    if index == "x"
+      index = 1
     else
-      i = 0
+      index = 0
     end
   end
 
   #Check if x won:
-  for i in 0..8
-    check_x_array = multiply_array_elements(x_array,win_conditions[i])
-      if check_x_array == win_conditions[i]
+  for index in 0..8
+    check_x_array = multiply_array_elements(x_array,win_conditions[index])
+      if check_x_array == win_conditions[index]
         puts "x wins!"
         game_over = true
       end
@@ -105,37 +106,37 @@ begin
   def block_x?(x_array,block_array)
     block_index = 9 #outside scope of array
     result_array = []
-    for i in 0..15
-      result_array = multiply_array_elements(x_array,block_array[i])
-        if result_array == block_array[i]
-          if i >= 0 && i <= 2
+    for index in 0..15
+      result_array = multiply_array_elements(x_array,block_array[index])
+        if result_array == block_array[index]
+          if index >= 0 && index <= 2
             block_index = 0 
-          elsif i == 3
+          elsif index == 3
             block_index = 1
-          elsif i >= 4 && i <= 6
+          elsif index >= 4 && index <= 6
             block_index = 2
-          elsif i == 7
+          elsif index == 7
             block_index = 3
-          elsif i == 8
+          elsif index == 8
             block_index = 5
-          elsif i >= 9 && i <= 11
+          elsif index >= 9 && index <= 11
             block_index = 6
-          elsif i == 12
+          elsif index == 12
             block_index = 7
-          elsif i >= 13 && i <= 15
+          elsif index >= 13 && index <= 15
             block_index = 8
         end
      end 
    end 
     return block_index 
-  end #=> block location. 10 means just place anywhere
+  end #=> block location. 9 means just place anywhere
 
   #Get computer input
   loop do 
     computer_input = rand(9)  #geta random number between from 0 to 8
     block_index = block_x?(x_array,block_conditions) 
 
-    if free_space == 0 #if the board is full, game over
+    if free_space == 0 || game_over == true #if the board is full, game over
       break
     elsif block_index != 9 && game_board_array[block_index] != "o" #should the computer block?
       game_board_array[block_index] = "o"
@@ -168,18 +169,18 @@ begin
   end
 
   #Convert o's in array to 1's 
-  o_array = game_board_array.map do |i|
-    if i == "o"
-      i = 1
+  o_array = game_board_array.map do |index|
+    if index == "o"
+      index = 1
     else
-      i = 0
+      index = 0
     end
   end
 
   #Check if o won:
-  for i in 0..8
-    check_o_array = multiply_array_elements(o_array,win_conditions[i])
-      if check_o_array == win_conditions[i]
+  for index in 0..8
+    check_o_array = multiply_array_elements(o_array,win_conditions[index])
+      if check_o_array == win_conditions[index]
         puts "o wins!"
         game_over = true
       end
