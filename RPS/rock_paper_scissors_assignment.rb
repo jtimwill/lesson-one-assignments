@@ -7,8 +7,8 @@ puts "Play Rock Paper Scissors!"
 
 #Initialize variables
 #                  W          L       T
-rock_array =     ["scissors","paper","rock"]
-paper_array =    ["rock","scissors","paper"] 
+rock_array     = ["scissors","paper","rock"]
+paper_array    = ["rock","scissors","paper"] 
 scissors_array = ["paper","rock","scissors"] 
 rock_paper_scissors_array = [rock_array,paper_array,scissors_array]
 
