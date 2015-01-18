@@ -29,7 +29,7 @@ end
 #Main loop
 begin
 
- #validate user input
+ #initialize
   game_board_array = [1,2,3,4,5,6,7,8,9]
   user_input = ""
   computer_input = 0
@@ -51,14 +51,14 @@ begin
               \n     |     |     "
 
   puts game_board
-
+  
+  #validate user input
   begin
     loop do
       puts "\nChoose an open position to place an x piece:"
       user_input = gets.chomp
       if (user_input == "1"||user_input == "2"||user_input == "3"||user_input == "4"||user_input == "5"||user_input == "6"||user_input == "7"||user_input == "8"||user_input =="9") 
         if (game_board_array[user_input.to_i-1] != "x") && (game_board_array[user_input.to_i-1] != "o")
-
           break
         end 
       else
