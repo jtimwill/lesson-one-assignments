@@ -6,7 +6,13 @@
 #Initialize variables
 puts "Play Tic Tac Toe"
 win_conditions = [[1,1,1,0,0,0,0,0,0],[0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,1,1,1],[1,0,0,1,0,0,1,0,0],
-                  [0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[1,0,0,0,1,0,0,0,1],[0,0,1,0,1,0,1,0,0]]
+                  [0,1,0,0,1,0,0,1,0],[0,0,1,0,0,1,0,0,1],[1,0,0,0,1,0,0,0,1],[0,0,1,0,1,0,1,0,0]] 
+
+
+block_conditions = [[0,0,0,1,0,0,1,0,0],[0,1,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,1],[0,0,0,0,1,0,0,1,0],
+                    [0,0,0,0,0,1,0,0,1],[0,0,0,0,1,0,1,0,0],[1,1,0,0,0,0,0,0,0],[0,0,0,0,1,1,0,0,0],
+                    [0,0,0,1,1,0,0,0,0],[1,0,0,1,0,0,0,0,0],[0,0,1,0,1,0,0,0,0],[0,0,0,0,0,0,0,1,1],
+                    [0,1,0,0,1,0,0,0,0],[0,0,1,0,0,1,0,0,0],[0,0,0,0,0,0,1,1,0],[1,0,0,0,1,0,0,0,0]]
 
 #Method that multiplies individual array elements 
 def multiply_array_elements(array1,array2)
@@ -93,15 +99,50 @@ begin
       if check_x_array == win_conditions[i]
         puts "x wins!"
         game_over = true
-        break
       end
   end 
+
+  #Should the computer block x?
+  def block_x?(x_array,block_array)
+    block_index = 9 #outside scope of array
+    result_array = []
+    for i in 0..15
+      result_array = multiply_array_elements(x_array,block_array[i])
+        if result_array == block_array[i]
+          if i >= 0 && i <= 2
+            block_index = 0 
+          elsif i == 3
+            block_index = 1
+          elsif i >= 4 && i <= 6
+            block_index = 2
+          elsif i == 7
+            block_index = 3
+          elsif i == 8
+            block_index = 5
+          elsif i >= 9 && i <= 11
+            block_index = 6
+          elsif i == 12
+            block_index = 7
+          elsif i >= 13 && i <= 15
+            block_index = 8
+        end
+     end 
+   end 
+    return block_index 
+  end #=> block location. 10 means just place anywhere
 
   #Get computer input
   loop do 
     computer_input = rand(9)  #geta random number between from 0 to 8
-    if free_space == 0
+    block_index = block_x?(x_array,block_conditions) 
+
+    if free_space == 0 #if the board is full, game over
       break
+    elsif block_index != 9 && game_board_array[block_index] != "o" #should the computer block?
+      game_board_array[block_index] = "o"
+      free_space = free_space - 1
+      break
+    #place o in a random open spot
     elsif (game_board_array[computer_input] != "x") && (game_board_array[computer_input] != "o")
       game_board_array[computer_input] = "o"
       free_space = free_space - 1
@@ -142,7 +183,6 @@ begin
       if check_o_array == win_conditions[i]
         puts "o wins!"
         game_over = true
-        break
       end
   end 
 
