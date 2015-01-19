@@ -88,10 +88,8 @@ shoe_array = four_decks.shuffle
 #discard first 
 discard_array = []
 discard_array = shoe_array.pop
-
 dealer_array = []
 player_array = []
-
 player_name = ""
 cut_location = 0
 player_bet = ""
@@ -99,7 +97,6 @@ player_bank = 100.00
 players_choice = ""
 player_hand_value = 0
 dealer_hand_value = 0
-
 player_status = ""
 dealer_status = ""
 #player_array = [card_1,card_2,card_3]
@@ -143,7 +140,7 @@ end #String name
 def get_player_bet(player_bank)
 
   loop do  
-    puts "How much do you want to bet? (enter float)"
+    puts "How much do you want to bet?"
     player_bet = gets.chomp
     #loop until the player inputs an int or float of equal or 
     #greater value than the value of the player's bank 
