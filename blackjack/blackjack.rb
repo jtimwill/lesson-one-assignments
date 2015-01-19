@@ -71,7 +71,6 @@ deck_one = [card_1,card_2,card_3,card_4,card_5,card_6,card_7,card_8,card_9,
             card_42,card_43,card_44,card_45,card_46,card_47,card_48,card_49,
             card_50,card_51,card_52]
 
-
 deck_two = deck_one
 deck_three = deck_one
 deck_three = deck_one
@@ -289,7 +288,6 @@ begin
 
      end while !/[wlbd]/.match(player_status)
     #End dealer loop 
-
 
    #Show dealer cards
    puts "Dealer hand value: #{evaluate_hand(dealer_array)}"
